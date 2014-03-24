@@ -1,4 +1,4 @@
 gaanaQuiz
 =========
 
-Quiz using gaana.com API's 
+Quiz using gaana API

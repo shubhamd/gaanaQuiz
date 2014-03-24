@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+		<title>Gaana Quiz</title>
+		<meta name="description" content="Responsive CSS Timeline with 3D Effect" />
+		<meta name="keywords" content="timeline, 3d, css, css3, css-only, transitions, responsive, fluid" />
+		<meta name="author" content="Codrops" />
+		<link rel="shortcut icon" href="../favicon.ico"> 
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+		<script src="js/modernizr.custom.63321.js"></script>
+		<script src="js/blockui.js"></script>
+		<script src="http://matthewlein.com/js/jquery.easing.1.3.js"></script>
+		<script src="http://anthonyterrien.com/js/jquery.knob.js"></script>
+		
+
+
+
+
+<!-- Contact Form CSS files -->
+<link type='text/css' href='css/basic.css' rel='stylesheet' media='screen' />
+		
+		<script src="js/App42-all-2.3.min.js"></script>
+		
+		<!--[if lte IE 7]><style>.support-note .note-ie{display:block;}</style><![endif]-->
+		<style>
+		body{
+
+			background: url(images/bg.jpg) fixed;
+		}
+div.growlUI { background: url(images/check48.png) no-repeat 10px 10px }
+div.growlUI h1, div.growlUI h1{
+    color: white; padding: 5px 5px 5px 75px; text-align: left
+}
+    
+		</style>
+	</head>
+	<body>
+		<button id="modal_button"></button>
+		<div class="growlUI" style="display: none;">
+            <h1>Correct Answer !</h1>
+            <h1>+100</h2>
+        </div>
+        <div class="growlUI1" style="display: none;">
+            <h1>Wrong Answer !</h1>
+            <h1></h2>
+        </div>
+		<div class="container">	
+
+			<!-- Codrops top bar -->
+			
+			<header class="clearfix">
+			
+				<div style="opacity:0.8;background:#66cccc;position:fixed; top:5px;left :0px;z-index:100;padding:5px;"><h1>The <span> gaana </span> Quiz</h1> <span> Q 1 </span></div>
+				<div style="position: fixed ;font : bold 20px tahoma; top:10px;right:0px;background:#66cccc;padding:10px;cursor:pointer;border-radius:5px;z-index:100;" id="brd" >LEADERBOARD</div>
+<div style="position: fixed ;top:100px;right:0px;z-index:100;"  class=".a">
+<input class="knob s" data-targetValue="15" id="clockDiv"></div>
+
+				<h2>Which movie 'Baby Doll' is from ?<span>OPTIONS</span></h2>
+			</header>
+			
+			<section class="main">',
+                
+				<ul class="timeline">
+
+					<li class="event">
+						<input type="radio" name="tl-group" checked id="a1" class="jugad"/>
+						<label></label>
+						<div class="thumb user-4"><span></span></div>
+						<div class="content-perspective">
+							<div class="content">
+								<div class="content-inner">
+									<h3 id="p1">I find your lack of faith disturbing</h3>
+									
+								</div>
+							</div>
+						</div>
+					</li>
+
+					<li class="event">
+						<input type="radio" class="jugad" id="a2" name="tl-group"/>
+						<label></label>
+						<div class="thumb user-6"><span></span></div>
+						<div class="content-perspective">
+							<div class="content">
+								<div class="content-inner">
+									<h3 id="p2">I find your lack of faith disturbing</h3>
+									
+								</div>
+							</div>
+						</div>
+					</li>
+
+					<li class="event">
+						<input type="radio" id="a3" class="jugad" name="tl-group"/>
+						<label></label>
+						<div class="thumb user-3"><span></span></div>
+						<div class="content-perspective">
+							<div class="content">
+								<div class="content-inner">
+									<h3 id="p3">I find your lack of faith disturbing</h3>
+									
+								</div>
+							</div>
+						</div>
+					</li>
+
+					<li class="event">
+						<input type="radio" id="a4" name="tl-group" class="jugad"/>
+						<label></label>
+						<div class="thumb user-5"><span></span></div>
+						<div class="content-perspective">
+							<div class="content">
+								<div class="content-inner">
+									<h3 id="p4">I find your lack of faith disturbing</h3>
+									
+								</div>
+							</div>
+						</div>
+					</li>
+
+				</ul>
+			</section>
+
+		</div><!-- /container -->
+		<script>
+
+
+
+	document.getElementById("clockDiv").addEventListener('input',function(){
+		if(this.value=='60'){
+ 			console.log(this.value);
+ 			getBoard();
+
+
+		}
+
+
+	},false);
+	
+	
+
+function Sound(name) {
+    
+    this.audio = document.createElement('audio');
+    var source = document.createElement('source');
+    source.src = 'sounds/' + name + '.wav';
+    this.audio.appendChild(source);
+  }
+   Sound.prototype.play = function() {
+   // this.stop();
+    this.audio.play();
+  };
+   Sound.prototype.repeat = function() {
+    this.audio.loop = true;
+    this.audio.play();
+  };
+
+  Sound.prototype.stop = function() {
+    this.audio.repeat = false;
+    this.audio.currentTime = 0;
+    this.audio.pause();
+  };
+  var Sounds = {
+    so: [
+      'result','ohh','cheer','appl','bg'
+    ]
+  };
+   Sounds.so.forEach(function(sound) {
+    Sounds[sound] = new Sound(sound);
+  });		
+		
+     var options = document.getElementsByTagName('h3');
+     var question = document.getElementsByTagName('h2'); 
+    var id ,score=0;
+Sounds.bg.play();
+(function(){
+	$.get('data.json', function(data){
+               
+startQuiz(data,0) ;
+             });  
+})();
+
+function startQuiz(data,qn){
+	
+	if((data.length-1)<qn){
+		saveScore(score);
+        getBoard(); 
+		return ;
+	}
+		
+	console.log(data[qn]['question']);
+	question[0].innerHTML = data[qn]['question'] ;
+	ar = [0,1,2,3] ;
+	ar = shuffle(ar);
+	options[ar[0]].innerHTML = data[qn]['answer'];	
+	options[ar[1]].innerHTML = data[qn]['option1'];
+	options[ar[2]].innerHTML = data[qn]['option2'];
+	options[ar[3]].innerHTML = data[qn]['option3'];
+	id = options[ar[0]].id ;
+	
+	$( ".jugad" ).unbind( "click touchstart" );
+	$(".jugad").on("click touchstart",function(){
+		var selectedId = this.id.replace("a","p") ;
+		if(selectedId==id){
+			Sounds.cheer.play();
+			$.blockUI({ 
+            message: $('div.growlUI'), 
+            fadeIn: 700, 
+            fadeOut: 700, 
+            timeout: 2000, 
+            showOverlay: false, 
+            centerY: false, 
+            css: { 
+                width: '350px',
+                position : 'absolute',
+                top: '50%',
+                left : '35%' ,
+                border: 'none', 
+                padding: '5px', 
+                backgroundColor: '#000', 
+                '-webkit-border-radius': '10px', 
+                '-moz-border-radius': '10px', 
+                opacity: .6, 
+                color: '#fff' 
+            } 
+        }); 
+			qn++;
+			score+=100;
+	startQuiz(data,qn);
+
+		}
+		else{
+			Sounds.ohh.play();
+			$.blockUI({ 
+            message: $('div.growlUI1'), 
+            fadeIn: 700, 
+            fadeOut: 700, 
+            timeout: 2000, 
+            showOverlay: false, 
+            centerY: false, 
+            css: { 
+                width: '350px',
+                position : 'absolute',
+                top: '50%',
+                left : '35%' ,
+                border: 'none', 
+                padding: '5px', 
+                backgroundColor: '#000', 
+                '-webkit-border-radius': '10px', 
+                '-moz-border-radius': '10px', 
+                opacity: .6, 
+                color: '#fff' 
+            } 
+        }); 
+
+			console.log("sahi nahi hai :p");
+			qn++;
+	startQuiz(data,qn);
+		}
+	});
+	
+
+}
+function shuffle(o){ //v1.0
+    for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+    return o;
+};
+		</script>
+
+<script src="js/leaderboard.js"></script>
+<div id="basic-modal-content">
+			
+		<span style="font: bold 35px tahoma;"><center>L E A D E R B O A R D</center></span>
+			<div id="Board">
+			
+			
+			</div>			
+</div>
+<script type='text/javascript' src='js/jquery.simplemodal.js'></script>
+<script>
+jQuery(function ($) {
+	// Load dialog on page load
+	//$('#basic-modal-content').modal();
+console.log("simple modal called !");
+	// Load dialog on click
+	$('#brd').click(function (e) {
+		$('#basic-modal-content').modal();
+
+		return false;
+	});
+});
+</script>
+
+<script src="js/clock.js"></script>
+<style>
+#clockDiv.a {
+width: 50px;
+height:50px;
+ 
+position:fixed;
+    
+}
+</style>
+<script src="js/move.js">
+	</body>
+</html>

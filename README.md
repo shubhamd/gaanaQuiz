@@ -1,4 +1,4 @@
 gaanaQuiz
 =========
 
-Quiz using gaana API
+Quiz using gaana Music metadata API.
